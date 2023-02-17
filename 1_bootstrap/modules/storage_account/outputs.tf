@@ -140,7 +140,7 @@ output "tables" {
 #   description = "List of ids of the tables created."
 # }
 
-output "storage_management_policy_id" {
-  value       = var.enabled && var.enable_storage_management_policy ? concat(azurerm_storage_management_policy.this[*], [""])[0] : null
-  description = "Id of the storage management policy created."
-}
+# output "storage_management_policy_id" {
+#   value       = var.enabled && var.enable_storage_management_policy ? concat(azurerm_storage_management_policy.this[*], [""])[0] : null
+#   description = "Id of the storage management policy created."
+# }

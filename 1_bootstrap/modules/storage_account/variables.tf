@@ -415,50 +415,50 @@ variable "tables" {
   description = "A list of the names of the tables that need to be created."
 }
 
-variable "enable_storage_management_policy" {
-  type        = bool
-  default     = false
-  description = "Enables or disables the storage management policy deployment for the storage account"
-}
+# variable "enable_storage_management_policy" {
+#   type        = bool
+#   default     = false
+#   description = "Enables or disables the storage management policy deployment for the storage account"
+# }
 
-variable "storage_management_policy_rules" {
-  type = object({
-    name    = optional(string)
-    enabled = optional(bool)
-    filters = optional(object({
-      prefix_match = string
-      blob_types   = list(string)
-      match_blob_index_tag = object({
-        name      = string
-        operation = string
-        value     = string
-      })
-    }))
-    actions = optional(object({
-      base_blob = optional(object({
-        tier_to_cool_after_days_since_modification_greater_than        = number
-        tier_to_cool_after_days_since_last_access_time_greater_than    = number
-        tier_to_archive_after_days_since_modification_greater_than     = number
-        tier_to_archive_after_days_since_last_access_time_greater_than = number
-        delete_after_days_since_modification_greater_than              = number
-        delete_after_days_since_last_access_time_greater_than          = number
-      }))
-      snapshot = optional(object({
-        change_tier_to_archive_after_days_since_creation = number
-        change_tier_to_cool_after_days_since_creation    = number
-        delete_after_days_since_creation_greater_than    = number
-      }))
-      version = optional(object({
-        change_tier_to_archive_after_days_since_creation = number
-        change_tier_to_cool_after_days_since_creation    = number
-        delete_after_days_since_creation                 = number
-      }))
-    }))
-  })
+# variable "storage_management_policy_rules" {
+#   type = object({
+#     name    = optional(string)
+#     enabled = optional(bool)
+#     filters = optional(object({
+#       prefix_match = string
+#       blob_types   = list(string)
+#       match_blob_index_tag = object({
+#         name      = string
+#         operation = string
+#         value     = string
+#       })
+#     }))
+#     actions = optional(object({
+#       base_blob = optional(object({
+#         tier_to_cool_after_days_since_modification_greater_than        = number
+#         tier_to_cool_after_days_since_last_access_time_greater_than    = number
+#         tier_to_archive_after_days_since_modification_greater_than     = number
+#         tier_to_archive_after_days_since_last_access_time_greater_than = number
+#         delete_after_days_since_modification_greater_than              = number
+#         delete_after_days_since_last_access_time_greater_than          = number
+#       }))
+#       snapshot = optional(object({
+#         change_tier_to_archive_after_days_since_creation = number
+#         change_tier_to_cool_after_days_since_creation    = number
+#         delete_after_days_since_creation_greater_than    = number
+#       }))
+#       version = optional(object({
+#         change_tier_to_archive_after_days_since_creation = number
+#         change_tier_to_cool_after_days_since_creation    = number
+#         delete_after_days_since_creation                 = number
+#       }))
+#     }))
+#   })
 
-  description = "Object with storage management policy rules that will be applied to the storage account. Each rule can have a name, an enabled state, filters, and actions. The filters determine which blobs the rule applies to and the actions determine what will happen to the matching blobs."
-  default     = null
-}
+#   description = "Object with storage management policy rules that will be applied to the storage account. Each rule can have a name, an enabled state, filters, and actions. The filters determine which blobs the rule applies to and the actions determine what will happen to the matching blobs."
+#   default     = null
+# }
 
 variable "tags" {
   type        = map(string)

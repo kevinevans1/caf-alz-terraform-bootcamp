@@ -21,8 +21,8 @@ TBD
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azapi"></a> [azapi](#provider\_azapi) | 1.2.0 |
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.39.1 |
+| <a name="provider_azapi"></a> [azapi](#provider\_azapi) | 1.3.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.44.1 |
 
 ### Modules
 
@@ -38,7 +38,6 @@ No modules.
 | [azapi_resource.this_tables](https://registry.terraform.io/providers/azure/azapi/latest/docs/resources/resource) | resource |
 | [azurerm_backup_protected_file_share.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/backup_protected_file_share) | resource |
 | [azurerm_storage_account.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) | resource |
-| [azurerm_storage_management_policy.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_management_policy) | resource |
 
 ### Inputs
 
@@ -70,7 +69,6 @@ No modules.
 | <a name="input_enable_network_rules"></a> [enable\_network\_rules](#input\_enable\_network\_rules) | Whether to enable network rules for the storage account | `bool` | `true` | no |
 | <a name="input_enable_queue_properties"></a> [enable\_queue\_properties](#input\_enable\_queue\_properties) | Enable queue properties for the storage account. | `bool` | `false` | no |
 | <a name="input_enable_static_website"></a> [enable\_static\_website](#input\_enable\_static\_website) | Enable the configuration for a static website on the storage account. | `bool` | `false` | no |
-| <a name="input_enable_storage_management_policy"></a> [enable\_storage\_management\_policy](#input\_enable\_storage\_management\_policy) | Enables or disables the storage management policy deployment for the storage account | `bool` | `false` | no |
 | <a name="input_enabled"></a> [enabled](#input\_enabled) | (Optional) Define if the use of the module is enabled or not. Great for test purposes. | `bool` | `true` | no |
 | <a name="input_file_shares"></a> [file\_shares](#input\_file\_shares) | A map of the file shares that need to be created. | <pre>map(<br>    object({<br>      quota            = optional(number)<br>      metadata         = optional(map(string))<br>      access_tier      = optional(string)<br>      enabled_protocol = optional(string)<br>      acl = optional(list(<br>        object({<br>          id            = string<br>          access_policy = optional(map(string))<br>      })))<br>      backup = optional(map(string))<br>    })<br>  )</pre> | `{}` | no |
 | <a name="input_identity_managed_identity_ids"></a> [identity\_managed\_identity\_ids](#input\_identity\_managed\_identity\_ids) | A list of user assigned identity ids for the managed identity of the storage account | `list(string)` | `[]` | no |
@@ -98,7 +96,6 @@ No modules.
 | <a name="input_static_website_error_404_document"></a> [static\_website\_error\_404\_document](#input\_static\_website\_error\_404\_document) | The name of the error 404 document for the static website. | `string` | `""` | no |
 | <a name="input_static_website_index_document"></a> [static\_website\_index\_document](#input\_static\_website\_index\_document) | The name of the index document for the static website. | `string` | `"index.html"` | no |
 | <a name="input_storage_account_name"></a> [storage\_account\_name](#input\_storage\_account\_name) | The name of the storage account | `string` | n/a | yes |
-| <a name="input_storage_management_policy_rules"></a> [storage\_management\_policy\_rules](#input\_storage\_management\_policy\_rules) | Object with storage management policy rules that will be applied to the storage account. Each rule can have a name, an enabled state, filters, and actions. The filters determine which blobs the rule applies to and the actions determine what will happen to the matching blobs. | <pre>object({<br>    name    = optional(string)<br>    enabled = optional(bool)<br>    filters = optional(object({<br>      prefix_match = string<br>      blob_types   = list(string)<br>      match_blob_index_tag = object({<br>        name      = string<br>        operation = string<br>        value     = string<br>      })<br>    }))<br>    actions = optional(object({<br>      base_blob = optional(object({<br>        tier_to_cool_after_days_since_modification_greater_than        = number<br>        tier_to_cool_after_days_since_last_access_time_greater_than    = number<br>        tier_to_archive_after_days_since_modification_greater_than     = number<br>        tier_to_archive_after_days_since_last_access_time_greater_than = number<br>        delete_after_days_since_modification_greater_than              = number<br>        delete_after_days_since_last_access_time_greater_than          = number<br>      }))<br>      snapshot = optional(object({<br>        change_tier_to_archive_after_days_since_creation = number<br>        change_tier_to_cool_after_days_since_creation    = number<br>        delete_after_days_since_creation_greater_than    = number<br>      }))<br>      version = optional(object({<br>        change_tier_to_archive_after_days_since_creation = number<br>        change_tier_to_cool_after_days_since_creation    = number<br>        delete_after_days_since_creation                 = number<br>      }))<br>    }))<br>  })</pre> | `null` | no |
 | <a name="input_table_encryption_key_type"></a> [table\_encryption\_key\_type](#input\_table\_encryption\_key\_type) | The encryption key type for the storage account's tables, either 'Service' or 'Account' | `string` | `"Service"` | no |
 | <a name="input_tables"></a> [tables](#input\_tables) | A list of the names of the tables that need to be created. | `set(string)` | `[]` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags to be added to the storage account. | `map(string)` | `{}` | no |
@@ -123,7 +120,6 @@ No modules.
 | <a name="output_secondary_blob_connection_string"></a> [secondary\_blob\_connection\_string](#output\_secondary\_blob\_connection\_string) | (Sensitive) Secondary blob connection string of the storage account |
 | <a name="output_secondary_connection_string"></a> [secondary\_connection\_string](#output\_secondary\_connection\_string) | (Sensitive) Secondary connection string of the storage account |
 | <a name="output_secondary_location"></a> [secondary\_location](#output\_secondary\_location) | Secondary location of the created storage account |
-| <a name="output_storage_management_policy_id"></a> [storage\_management\_policy\_id](#output\_storage\_management\_policy\_id) | Id of the storage management policy created. |
 | <a name="output_tables"></a> [tables](#output\_tables) | List of map of attributes generated by the tables. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 

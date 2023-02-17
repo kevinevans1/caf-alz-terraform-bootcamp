@@ -349,72 +349,72 @@ resource "azapi_resource" "this_tables" {
 #   ]
 # }
 
-resource "azurerm_storage_management_policy" "this" {
-  count = var.enabled && var.enable_storage_management_policy && var.storage_management_policy_rules != null ? 1 : 0
+# resource "azurerm_storage_management_policy" "this" {
+#   count = var.enabled && var.enable_storage_management_policy && var.storage_management_policy_rules != null ? 1 : 0
 
-  storage_account_id = try(azurerm_storage_account.this[0].id, null)
-  dynamic "rule" {
-    for_each = var.enabled && var.enable_storage_management_policy ? var.storage_management_policy_rules : null
+#   storage_account_id = try(azurerm_storage_account.this[0].id, null)
+#   dynamic "rule" {
+#     for_each = var.enabled && var.enable_storage_management_policy ? var.storage_management_policy_rules : null
 
-    content {
-      name    = try(rule.name, null)
-      enabled = try(rule.enabled, null)
+#     content {
+#       name    = try(rule.name, null)
+#       enabled = try(rule.enabled, null)
 
-      dynamic "filters" {
-        for_each = try(rule.filters, {})
+#       dynamic "filters" {
+#         for_each = try(rule.filters, {})
 
-        content {
-          prefix_match = try(filters.value.prefix_match, null)
-          blob_types   = try(filters.value.blob_types, null)
+#         content {
+#           prefix_match = try(filters.value.prefix_match, null)
+#           blob_types   = try(filters.value.blob_types, null)
 
-          dynamic "match_blob_index_tag" {
-            for_each = try(filters.match_blob_index_tag, {})
+#           dynamic "match_blob_index_tag" {
+#             for_each = try(filters.match_blob_index_tag, {})
 
-            content {
-              name      = try(match_blob_index_tag.value.name, null)
-              operation = try(match_blob_index_tag.value.operation, null)
-              value     = try(match_blob_index_tag.value.value, null)
-            }
-          }
-        }
+#             content {
+#               name      = try(match_blob_index_tag.value.name, null)
+#               operation = try(match_blob_index_tag.value.operation, null)
+#               value     = try(match_blob_index_tag.value.value, null)
+#             }
+#           }
+#         }
 
-      }
-      actions {
-        dynamic "base_blob" {
-          for_each = try(rule.actions.base_blob, {})
+#       }
+#       actions {
+#         dynamic "base_blob" {
+#           for_each = try(rule.actions.base_blob, {})
 
-          content {
-            tier_to_cool_after_days_since_modification_greater_than        = try(base_blob.value.tier_to_cool_after_days_since_modification_greater_than, null)
-            tier_to_cool_after_days_since_last_access_time_greater_than    = try(base_blob.value.tier_to_cool_after_days_since_last_access_time_greater_than, null)
-            tier_to_archive_after_days_since_modification_greater_than     = try(base_blob.value.tier_to_archive_after_days_since_modification_greater_than, null)
-            tier_to_archive_after_days_since_last_access_time_greater_than = try(base_blob.value.tier_to_archive_after_days_since_last_access_time_greater_than, null)
-            delete_after_days_since_modification_greater_than              = try(base_blob.value.delete_after_days_since_modification_greater_than, null)
-            delete_after_days_since_last_access_time_greater_than          = try(base_blob.value.delete_after_days_since_last_access_time_greater_than, null)
-          }
-        }
+#           content {
+#             tier_to_cool_after_days_since_modification_greater_than        = try(base_blob.value.tier_to_cool_after_days_since_modification_greater_than, null)
+#             tier_to_cool_after_days_since_last_access_time_greater_than    = try(base_blob.value.tier_to_cool_after_days_since_last_access_time_greater_than, null)
+#             tier_to_archive_after_days_since_modification_greater_than     = try(base_blob.value.tier_to_archive_after_days_since_modification_greater_than, null)
+#             tier_to_archive_after_days_since_last_access_time_greater_than = try(base_blob.value.tier_to_archive_after_days_since_last_access_time_greater_than, null)
+#             delete_after_days_since_modification_greater_than              = try(base_blob.value.delete_after_days_since_modification_greater_than, null)
+#             delete_after_days_since_last_access_time_greater_than          = try(base_blob.value.delete_after_days_since_last_access_time_greater_than, null)
+#           }
+#         }
 
-        dynamic "snapshot" {
-          for_each = try(rule.actions.snapshot, {})
+#         dynamic "snapshot" {
+#           for_each = try(rule.actions.snapshot, {})
 
-          content {
-            change_tier_to_archive_after_days_since_creation = try(snapshot.value.change_tier_to_archive_after_days_since_creation, null)
-            change_tier_to_cool_after_days_since_creation    = try(snapshot.value.change_tier_to_cool_after_days_since_creation, null)
-            delete_after_days_since_creation_greater_than    = try(snapshot.value.delete_after_days_since_creation_greater_than, null)
-          }
-        }
+#           content {
+#             change_tier_to_archive_after_days_since_creation = try(snapshot.value.change_tier_to_archive_after_days_since_creation, null)
+#             change_tier_to_cool_after_days_since_creation    = try(snapshot.value.change_tier_to_cool_after_days_since_creation, null)
+#             delete_after_days_since_creation_greater_than    = try(snapshot.value.delete_after_days_since_creation_greater_than, null)
+#           }
+#         }
 
-        dynamic "version" {
-          for_each = try(rule.actions.version, {})
+#         dynamic "version" {
+#           for_each = try(rule.actions.version, {})
 
-          content {
-            change_tier_to_archive_after_days_since_creation = try(version.value.change_tier_to_archive_after_days_since_creation, null)
-            change_tier_to_cool_after_days_since_creation    = try(version.value.change_tier_to_cool_after_days_since_creation, null)
-            delete_after_days_since_creation                 = try(version.value.delete_after_days_since_creation, null)
-          }
-        }
-      }
-    }
-  }
-}
+#           content {
+#             change_tier_to_archive_after_days_since_creation = try(version.value.change_tier_to_archive_after_days_since_creation, null)
+#             change_tier_to_cool_after_days_since_creation    = try(version.value.change_tier_to_cool_after_days_since_creation, null)
+#             delete_after_days_since_creation                 = try(version.value.delete_after_days_since_creation, null)
+#           }
+#         }
+#       }
+#     }
+#   }
+# }
 #To Do
 #Encryption scope when not in preview

@@ -22,7 +22,7 @@ Integration tests are done periodically. The process deploys all scenarios in th
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.39.1 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.44.1 |
 
 ### Modules
 
