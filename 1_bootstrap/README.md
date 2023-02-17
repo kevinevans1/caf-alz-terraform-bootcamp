@@ -78,7 +78,9 @@ Note: Replace <SUBSCRIPTION_ID> with the ID of your Azure subscription.
 
 1. Save the updated configuration file.
 
-1. Run `terraform init -migrate-state` to initialize the backend and migrate the state from the local backend to the AzureRM backend (storage account).
+1. Run `terraform init --migrate-state` to initialize the backend and migrate the state from the local backend to the AzureRM backend (storage account).
+
+1. Run `terraform refresh` to make sure the state has been migrated adequately.
 
 That's it! The state of the deployment you did earlier is now on the storage account you have deployed! The Terraform state has now been migrated from a local backend to an AzureRM backend using a blob storage account. You can now use the storage account and blob container to host the state file of your other deployments and if you need to update its configurations, you can use Terraform to do so.
 

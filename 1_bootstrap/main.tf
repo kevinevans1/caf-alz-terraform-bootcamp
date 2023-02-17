@@ -13,10 +13,12 @@ module "bootstrap_role_assignment_storage_blob_data_owner" {
 }
 
 module "bootstrap_storage_account" {
-  source               = "./modules/storage_account"
-  storage_account_name = var.bootstrap_storage_account_name
-  resource_group_name  = module.bootstrap_resource_group.name
-  location             = module.bootstrap_resource_group.location
-  blob_containers      = var.bootstrap_storage_account_blob_containers
-  tags                 = var.bootstrap_storage_account_tags
+  source                        = "./modules/storage_account"
+  storage_account_name          = var.bootstrap_storage_account_name
+  resource_group_name           = module.bootstrap_resource_group.name
+  location                      = module.bootstrap_resource_group.location
+  public_network_access_enabled = true
+  network_rules_default_action  = "Allow"
+  blob_containers               = var.bootstrap_storage_account_blob_containers
+  tags                          = var.bootstrap_storage_account_tags
 }
