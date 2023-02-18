@@ -8,7 +8,6 @@ examples/*/.tflint.hcl
 # .tfstate files
 *.tfstate
 *.tfstate.*
-*.lock.hcl
 
 # Crash log files
 crash.log

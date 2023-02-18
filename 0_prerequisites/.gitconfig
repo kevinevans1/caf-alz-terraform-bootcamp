@@ -1,0 +1,7 @@
+[user]
+	name = YOUR NAME
+	email = MAILADDRESS
+
+[alias]
+	branch-cleanup = !pwsh -c 'git checkout main && git pull && git remote prune origin && git branch -vv | Select-String -Pattern "gone]" | ForEach-Object { $_.toString().Split(" ")[2] } | % {git branch -d $_}'
+	force-branch-cleanup = !pwsh -c 'git checkout main && git pull && git remote prune origin && git branch -vv | Select-String -Pattern "gone]" | ForEach-Object { $_.toString().Split(" ")[2] } | % {git branch -D $_}'
