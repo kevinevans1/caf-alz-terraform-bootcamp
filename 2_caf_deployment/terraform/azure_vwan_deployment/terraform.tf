@@ -8,6 +8,13 @@ terraform {
       version = ">= 3.39.0"
     }
   }
+  backend "azurerm" {
+    resource_group_name  = "testmrtf"
+    storage_account_name = "testmrtf1231234"
+    container_name       = "tfstate"
+    key                  = "caf_vwan.tfstate"
+    use_azuread_auth     = true
+  }
 }
 
 # Declare a standard provider block using your preferred configuration.
@@ -45,6 +52,3 @@ provider "azurerm" {
   subscription_id = var.subscription_id_connectivity
   features {}
 }
-
-
-

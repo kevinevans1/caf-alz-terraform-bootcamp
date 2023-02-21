@@ -8,7 +8,7 @@ locals {
           enabled = true
           config = {
             address_prefix = "10.200.0.0/22"
-            location       = "northeurope"
+            location       = "canadacentral"
             sku            = ""
             routes         = []
             expressroute_gateway = {
@@ -50,7 +50,7 @@ locals {
           enabled = true
           config = {
             address_prefix = "10.201.0.0/22"
-            location       = "westeurope"
+            location       = "canadaeast"
             sku            = ""
             routes         = []
             expressroute_gateway = {
@@ -90,9 +90,9 @@ locals {
         },
       ]
       ddos_protection_plan = {
-        enabled = true
+        enabled = false
         config = {
-          location = "northeurope"
+          location = "canadacentral"
         }
       }
       dns = {
@@ -143,8 +143,8 @@ locals {
             azure_cache_for_redis                = true
           }
           private_link_locations = [
-            "northeurope",
-            "westeurope",
+            "canadacentral",
+            "canadaeast",
           ]
           public_dns_zones                                       = []
           private_dns_zones                                      = []

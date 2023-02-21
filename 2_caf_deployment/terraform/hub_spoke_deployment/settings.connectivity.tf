@@ -7,7 +7,7 @@ locals {
           enabled = true
           config = {
             address_space                = ["10.100.0.0/16", ]
-            location                     = "northeurope"
+            location                     = "canadacentral"
             link_to_ddos_protection_plan = false
             dns_servers                  = []
             bgp_community                = ""
@@ -57,7 +57,7 @@ locals {
       ddos_protection_plan = {
         enabled = false
         config = {
-          location = "northeurope"
+          location = "canadacentral"
         }
       }
       dns = {
@@ -129,8 +129,7 @@ locals {
             storage_account_web                  = true
           }
           private_link_locations = [
-            "northeurope",
-            "westeurope",
+            "canadacentral"
           ]
           public_dns_zones                                       = []
           private_dns_zones                                      = []

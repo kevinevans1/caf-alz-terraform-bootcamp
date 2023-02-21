@@ -9,6 +9,12 @@ This README provides steps to migrate a Terraform state file from a local backen
 
 ## Steps
 
+1. Connect to the Azure Portal with the credentials provided for the lab. 
+
+1. Set the subscription filter to get only your subscriptions (Connectivity, Identity, Landing-Zone, Management, Sandbox). 
+
+1. Note the subscription IDs for each subscriptions.
+
 1. Clone the `caf-alz-terraform-bootcamp` repository onto your machine and take note of the path of the folder.
 
 1. Open the file `localvar.tfvars` located in the folder `caf-alz-terraform-bootcamp/1_bootstrap` using a text editor (ex: VSCode)
@@ -51,7 +57,7 @@ az login
 az account set --subscription <SUBSCRIPTION_ID>
 ```
 
-Note: Replace <SUBSCRIPTION_ID> with the ID of your Azure subscription.
+Note: Replace <SUBSCRIPTION_ID> with the ID of your Azure subscription (In this scenario the sandbox subscription).
 
 1. Change the current directory to the `caf-alz-terraform-bootcamp` folder you have cloned. Then change it to the `1_bootstrap` folder.
 
@@ -80,7 +86,7 @@ Note: Replace <SUBSCRIPTION_ID> with the ID of your Azure subscription.
 
 1. Run `terraform init --migrate-state` to initialize the backend and migrate the state from the local backend to the AzureRM backend (storage account).
 
-1. Run `terraform refresh` to make sure the state has been migrated adequately.
+1. Run `terraform refresh --var-file=./localvar.tfvars` to make sure the state has been migrated adequately.
 
 That's it! The state of the deployment you did earlier is now on the storage account you have deployed! The Terraform state has now been migrated from a local backend to an AzureRM backend using a blob storage account. You can now use the storage account and blob container to host the state file of your other deployments and if you need to update its configurations, you can use Terraform to do so.
 
